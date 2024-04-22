@@ -33,7 +33,7 @@ def get_learned_conditioning(self: sgm.models.diffusion.DiffusionEngine, batch: 
     sdxl_conds = {
         "txt": batch,
         "original_size_as_tuple": torch.tensor([height, width], **devices_args).repeat(len(batch), 1),
-        "crop_coords_top_left": torch.tensor([shared.opts.sdxl_crop_top, shared.opts.sdxl_crop_left], **devices_args).repeat(len(batch), 1),
+        "crop_coords_top_left": torch.tensor([sdxl_crop_top, sdxl_crop_left], **devices_args).repeat(len(batch), 1),
         "target_size_as_tuple": torch.tensor([height, width], **devices_args).repeat(len(batch), 1),
         "aesthetic_score": torch.tensor([aesthetic_score], **devices_args).repeat(len(batch), 1),
     }
