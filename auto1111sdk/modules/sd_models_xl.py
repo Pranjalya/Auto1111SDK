@@ -15,9 +15,13 @@ def get_learned_conditioning(self: sgm.models.diffusion.DiffusionEngine, batch: 
     if shared.opts is None:
         sdxl_refiner_low_aesthetic_score = 2.5
         sdxl_refiner_high_aesthetic_score = 6.0
+        sdxl_crop_top = 0
+        sdxl_crop_left = 0
     else:
         sdxl_refiner_low_aesthetic_score = shared.opts.sdxl_refiner_low_aesthetic_score
         sdxl_refiner_high_aesthetic_score = shared.opts.sdxl_refiner_high_aesthetic_score
+        sdxl_crop_top = shared.opts.sdxl_crop_top
+        sdxl_crop_left = shared.opts.sdxl_crop_left
 
     width = getattr(batch, 'width', 1024)
     height = getattr(batch, 'height', 1024)
