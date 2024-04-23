@@ -24,7 +24,12 @@ def randn_local(seed, shape):
 
     Does not change the global random number generator. You can only generate the seed's first tensor using this function."""
 
-    if shared.opts.randn_source == "NV":
+    if shared.opts is None and torch.cuda.is_available():
+        randn_source = "NV"
+    else:
+        randn_source = shared.opts.randn_source
+
+    if randn_source == "NV":
         rng = rng_philox.Generator(seed)
         return torch.asarray(rng.randn(shape), device=devices.device)
 
