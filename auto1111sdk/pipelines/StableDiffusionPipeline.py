@@ -334,6 +334,11 @@ class StableDiffusionPipeline:
         p.is_api = True
         p.init_images = [init_image]
         p.image_mask = mask
+        
+        if self.controlnet:
+            p.scripts = self.controlnet.script_runner
+            p.script_args = self.controlnet.script_args
+
         processed = process_images(p, self.__aliases, self.__model_data, self.__pipe, self.weights_file)
         if hasattr(p, 'close'):
             p.close()
