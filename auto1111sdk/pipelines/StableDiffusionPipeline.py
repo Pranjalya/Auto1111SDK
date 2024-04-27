@@ -345,6 +345,11 @@ class StableDiffusionPipeline:
         output_images = list(processed.images)
         self.pipeline_data = p
         return output_images
+
+    def unload_model():
+        from ..modules import sd_models
+        sd_models.unload_model_weights(self.__pipe)
+        
     
     def sd_upscale_img2img(self, prompt: str, init_image: Image, upscaler = None, overlap: int = 64, scale_factor: int = 2, negative_prompt: str = "", seed: int = -1, steps: int = 20, cfg_scale: float = 7.0, num_images: int = 1, sampler_name: str = 'Euler', denoising_strength: float = 0.75):
         from ..modules.processing import process_images, StableDiffusionProcessingImg2Img
