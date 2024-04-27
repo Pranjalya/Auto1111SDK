@@ -328,8 +328,8 @@ class StableDiffusionPipeline:
         }
         for param, value in kwargs.items():
             input_params[param] = value
-        print(input_params)
         input_params = self.__process_args_inpainting(**input_params)
+        print(input_params)
         p = StableDiffusionProcessingImg2Img(sd_model=self.__pipe, **input_params)
         p.is_api = True
         p.init_images = [init_image]
