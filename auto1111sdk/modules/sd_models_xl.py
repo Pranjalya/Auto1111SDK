@@ -29,7 +29,7 @@ def get_learned_conditioning(self: sgm.models.diffusion.DiffusionEngine, batch: 
     aesthetic_score = sdxl_refiner_low_aesthetic_score if is_negative_prompt else sdxl_refiner_high_aesthetic_score
 
     if torch.cuda.is_available():
-        devices.device = "cuda:0"
+        devices.device = torch.device("cuda:0")
     devices_args = dict(device=devices.device, dtype=devices.dtype)
 
     sdxl_conds = {
