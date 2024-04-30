@@ -328,12 +328,16 @@ class StableDiffusionPipeline:
         }
         for param, value in kwargs.items():
             input_params[param] = value
-        print(input_params)
         input_params = self.__process_args_inpainting(**input_params)
         p = StableDiffusionProcessingImg2Img(sd_model=self.__pipe, **input_params)
         p.is_api = True
         p.init_images = [init_image]
         p.image_mask = mask
+        
+        if self.controlnet:
+            p.scripts = self.controlnet.script_runner
+            p.script_args = self.controlnet.script_args
+
         processed = process_images(p, self.__aliases, self.__model_data, self.__pipe, self.weights_file)
         if hasattr(p, 'close'):
             p.close()

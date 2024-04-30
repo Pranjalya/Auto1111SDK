@@ -65,7 +65,7 @@ class ControlNetModel:
                  resize_mode: int = 1, lowvram: bool = False, processor_res: int = 512, 
                  threshold_a: int = 1, threshold_b: int = 1, guidance_start: float = 0.0, 
                  guidance_end: float = 1.0, control_mode: int = 0, pixel_perfect: bool = False, 
-                 default_command_args = None):
+                 default_command_args = None, is_img2img = False):
 
         if not model_path:
             raise ValueError("Parameter 'model_path' is required and cannot be None or empty.")
@@ -131,16 +131,20 @@ class ControlNetModel:
             'pixel_perfect': pixel_perfect
         }
 
-        script_runner = scripts.scripts_txt2img
+        if not is_img2img:
+            script_runner = scripts.scripts_txt2img
+        else:
+            script_runner = scripts.scripts_img2img
 
         if not script_runner.scripts:
             script_runner.initialize_scripts(False)
 
         os.environ['CONTROLNET_MODELS_PATH'] = os.path.dirname(os.path.abspath(model_path))
 
-        print(global_state.cn_models_dir_old)
+        # global_state.cn_models_dir_old = os.environ.get('CONTROLNET_MODELS_PATH', "./")
+        # print(global_state.cn_models_dir_old)
 
-        # update_cn_models(os.path.dirname(os.path.abspath(model_path)))
+        # update_cn_models()
 
         UiControlNetUnit = control_net_ui_group.UiControlNetUnit
 
