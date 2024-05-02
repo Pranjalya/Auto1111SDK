@@ -131,7 +131,7 @@ class ControlNetModel:
         }
 
         if type(image) is str:
-            self.config["image"] = read_image(image):
+            self.config["image"] = read_image(image)
         else:
             self.config["image"] = self.__encode_image(image)
 
