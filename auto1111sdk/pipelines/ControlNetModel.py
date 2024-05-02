@@ -61,7 +61,7 @@ def read_image(img_path):
     return encoded_image
 
 class ControlNetModel:
-    def __init__(self, model_path: str, image: str, module: str = 'none', weight: float = 1.0, 
+    def __init__(self, model_path: str, image: str | Image, module: str = 'none', weight: float = 1.0, 
                  resize_mode: int = 1, lowvram: bool = False, processor_res: int = 512, 
                  threshold_a: int = 1, threshold_b: int = 1, guidance_start: float = 0.0, 
                  guidance_end: float = 1.0, control_mode: int = 0, pixel_perfect: bool = False, 
@@ -119,7 +119,6 @@ class ControlNetModel:
             'module': module,  # Assuming this remains constant as well
             'model': model_path,
             'weight': weight,
-            'image': read_image(image),
             'resize_mode': resize_mode,
             'lowvram': lowvram,
             'processor_res': processor_res,
@@ -130,6 +129,11 @@ class ControlNetModel:
             'control_mode': control_mode,
             'pixel_perfect': pixel_perfect
         }
+
+        if type(image) is str:
+            self.config["image"] = read_image(image):
+        else:
+            self.config["image"] = self.__encode_image(image)
 
         if not is_img2img:
             script_runner = scripts.scripts_txt2img
@@ -162,3 +166,10 @@ class ControlNetModel:
 
         self.script_runner = script_runner
         self.script_args = controlnet_script_tuple
+
+
+    def __encode_image(self, image):
+        buffered = io.BytesIO()
+        image.save(buffered, format="PNG")
+        img_str = base64.b64encode(buffered.getvalue())        
+        return [img_str.decode('utf-8')]
