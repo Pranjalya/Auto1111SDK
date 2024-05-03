@@ -247,6 +247,7 @@ def update_cn_models():
     #             if extra_lora_path is not None and os.path.exists(extra_lora_path))
     # paths = [cn_models_dir, cn_models_dir_old, *extra_lora_paths]
     paths = [cn_models_dir_old]
+    paths.append(os.environ.get('CONTROLNET_MODELS_PATH', "./"))
 
     for path in paths:
         # sort_by = shared.opts.data.get(
