@@ -117,7 +117,7 @@ class ControlNetModel:
         self.config = {
             'enabled': True, 
             'module': module,  # Assuming this remains constant as well
-            'model': model_path,
+            'model': os.path.basename(model_path),
             'weight': weight,
             'resize_mode': resize_mode,
             'lowvram': lowvram,
