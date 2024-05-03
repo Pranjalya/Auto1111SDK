@@ -117,9 +117,8 @@ class ControlNetModel:
         self.config = {
             'enabled': True, 
             'module': module,  # Assuming this remains constant as well
-            'model': model_path,
+            'model': os.path.basename(model_path),
             'weight': weight,
-            'image': read_image(image),
             'resize_mode': resize_mode,
             'lowvram': lowvram,
             'processor_res': processor_res,
@@ -130,6 +129,11 @@ class ControlNetModel:
             'control_mode': control_mode,
             'pixel_perfect': pixel_perfect
         }
+
+        if type(image) is str:
+            self.config["image"] = read_image(image)
+        else:
+            self.config["image"] = self.__encode_image(image)
 
         if not is_img2img:
             script_runner = scripts.scripts_txt2img
@@ -144,7 +148,7 @@ class ControlNetModel:
         # global_state.cn_models_dir_old = os.environ.get('CONTROLNET_MODELS_PATH', "./")
         # print(global_state.cn_models_dir_old)
 
-        # update_cn_models()
+        global_state.update_cn_models()
 
         UiControlNetUnit = control_net_ui_group.UiControlNetUnit
 
@@ -162,3 +166,10 @@ class ControlNetModel:
 
         self.script_runner = script_runner
         self.script_args = controlnet_script_tuple
+
+
+    def __encode_image(self, image):
+        buffered = io.BytesIO()
+        image.save(buffered, format="PNG")
+        img_str = base64.b64encode(buffered.getvalue())        
+        return [img_str.decode('utf-8')]
