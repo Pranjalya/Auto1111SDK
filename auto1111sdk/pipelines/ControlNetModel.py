@@ -61,7 +61,7 @@ def read_image(img_path):
     return encoded_image
 
 class ControlNetModel:
-    def __init__(self, model_path: str, image: str | Image, module: str = 'none', weight: float = 1.0, 
+    def __init__(self, model_path: str, image: str, module: str = 'none', weight: float = 1.0, 
                  resize_mode: int = 1, lowvram: bool = False, processor_res: int = 512, 
                  threshold_a: int = 1, threshold_b: int = 1, guidance_start: float = 0.0, 
                  guidance_end: float = 1.0, control_mode: int = 0, pixel_perfect: bool = False, 
@@ -148,7 +148,7 @@ class ControlNetModel:
         # global_state.cn_models_dir_old = os.environ.get('CONTROLNET_MODELS_PATH', "./")
         # print(global_state.cn_models_dir_old)
 
-        # update_cn_models()
+        global_state.update_cn_models()
 
         UiControlNetUnit = control_net_ui_group.UiControlNetUnit
 

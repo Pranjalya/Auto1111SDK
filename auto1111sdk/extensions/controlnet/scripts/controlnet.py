@@ -384,6 +384,7 @@ class Script(scripts.Script, metaclass=(
 
     @staticmethod
     def load_control_model(p, unet, model) -> ControlModel:
+        print("Load", model)
         if model in Script.model_cache:
             logger.info(f"Loading model from cache: {model}")
             control_model = Script.model_cache[model]
@@ -414,6 +415,7 @@ class Script(scripts.Script, metaclass=(
 
     @staticmethod
     def build_control_model(p, unet, model) -> ControlModel:
+        print("Build", model)
         if model is None or model == 'None':
             raise RuntimeError(f"You have not selected any ControlNet Model.")
 
@@ -938,6 +940,7 @@ class Script(scripts.Script, metaclass=(
                 else:
                     raise Exception("Unable to determine control_model_type.")
             else:
+                print("Unit model", unit.model)
                 model_net, control_model_type = Script.load_control_model(p, unet, unit.model)
                 model_net.reset()
 
