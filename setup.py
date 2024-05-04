@@ -30,7 +30,7 @@ setup(
     "blendmodes==2022",
     "clean-fid==0.1.35",
     "einops==0.4.1",
-    "fastapi==0.94.0",
+    "fastapi",
     "gfpgan==1.3.8",
     "gradio==3.41.2",
     "httpcore==0.15",
