@@ -136,6 +136,8 @@ default_args_img2img_inpainting = {
     'n_iter': 1,
     'steps': 5,
     'cfg_scale': 7.0,
+    'width': 512,
+    'height': 768,
     'restore_faces': None,
     'tiling': None,
     'do_not_save_samples': True,
