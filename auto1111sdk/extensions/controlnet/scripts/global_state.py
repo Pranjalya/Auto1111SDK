@@ -263,12 +263,16 @@ def update_cn_models():
     cn_models.clear()
     cn_models.update({**{"None": None}, **cn_models_copy})
 
+    print("CN Models", cn_models)
+
     cn_models_names.clear()
     for name_and_hash, filename in cn_models.items():
         if filename is None:
             continue
         name = os.path.splitext(os.path.basename(filename))[0].lower()
         cn_models_names[name] = name_and_hash
+    
+    print("CN Model names", cn_models_names)
 
 
 
