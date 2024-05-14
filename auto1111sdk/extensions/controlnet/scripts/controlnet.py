@@ -1212,6 +1212,7 @@ class Script(scripts.Script, metaclass=(
         return
 
     def postprocess(self, p, processed, *args):
+        print("Postprocessing in")
         sd_ldm = p.sd_model
         unet = sd_ldm.model.diffusion_model
 
@@ -1274,6 +1275,7 @@ class Script(scripts.Script, metaclass=(
             for stat in tracemalloc.take_snapshot().compare_to(self.malloc_begin, "lineno")[:10]:
                 logger.info(stat)
             tracemalloc.stop()
+        print("Postprocessing out")
 
     def batch_tab_process(self, p, batches, *args, **kwargs):
         self.enabled_units = Script.get_enabled_units(p)
