@@ -167,8 +167,8 @@ default_args_img2img_inpainting = {
     'inpainting_mask_invert': 0,
     'initial_noise_multiplier': None,
     'latent_mask': None,
-    'sampler_index': None,
-    'include_init_images': True
+    'sampler_index': None
+    # 'include_init_images': True
 }
 
 class StableDiffusionPipeline:
