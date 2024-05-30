@@ -665,9 +665,6 @@ class Script(scripts.Script, metaclass=(
         image = parse_unit_image(unit)
         a1111_image = getattr(p, "init_images", [None])[0]
 
-        print("image", image)
-        print("a1111_image", a1111_image)
-
         resize_mode = external_code.resize_mode_from_value(unit.resize_mode)
 
         if batch_hijack.instance.is_batch and p_image_control is not None:
