@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-    "GitPython==3.1.32",
+    "GitPython",
     "Pillow==9.5.0",
     "accelerate==0.21.0",
     "basicsr==1.4.2",
@@ -55,7 +55,7 @@ setup(
     "torchsde==0.2.6",
     "transformers==4.30.2",
     "httpx==0.24.1",
-    "clip"
+    "git+https://github.com/openai/CLIP.git"
 ],
     keywords=['python', 'Automatic 1111', 'Stable Diffusion Web UI', 'image generation', 'stable diffusion', 'civit ai'], 
     classifiers=[
