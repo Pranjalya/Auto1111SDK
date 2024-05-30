@@ -55,7 +55,7 @@ setup(
     "torchsde==0.2.6",
     "transformers==4.30.2",
     "httpx==0.24.1",
-    "git+https://github.com/openai/CLIP.git"
+    "clip"
 ],
     keywords=['python', 'Automatic 1111', 'Stable Diffusion Web UI', 'image generation', 'stable diffusion', 'civit ai'], 
     classifiers=[
