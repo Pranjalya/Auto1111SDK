@@ -23,7 +23,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-    "GitPython",
     "Pillow==9.5.0",
     "accelerate==0.21.0",
     "basicsr==1.4.2",
